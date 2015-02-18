@@ -1,0 +1,40 @@
+.box {
+    width: 400px;
+    margin: 100px auto 0 auto;
+    background-color: #fbfbfb;
+    padding: 50px;
+    position: relative;
+    border-radius: 5px;
+    border : 1px solid #ccc;
+}
+
+.box:after {
+    position: absolute;
+    top: 0%;
+    height: 130px;
+    background: #999;
+    border-bottom: 1px solid #666;
+    left: 0;
+    right: 0;
+    content : '';
+    z-index: 0;
+}
+
+.box .photo {
+    border-radius: 100%;
+    margin: 0 auto 50px auto;
+    display: block;
+    z-index: 10;
+    position: relative;
+    border: 1px solid #fff;
+}
+
+.box .information-list .title{
+    display: block;
+    font-family: arial, helvetica, sans-serif;
+    color: #003202;
+    font-weight: bold;
+}
+.box .information-list {
+    margin-bottom: 15px;
+}

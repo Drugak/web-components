@@ -1,8 +1,26 @@
-<link rel="stylesheet" href="../src/card.css"/>
 <script type="text/javascript" src="../src/card.js"></script>
 
-<template id="my-card">
-    <img id="avatar" src="" alt=""/>
-    <p id="name"></p>
-    <b id="other"></b>
+<template id="random-user">
+    <style>
+        @import 'src/card.css';
+    </style>
+    <div class="box">
+        <img class="photo" id="photo" src="" alt=""/>
+        <div class="information-list">
+            <span class="title">MY NAME</span>
+            <span id="name" class="name-item"></span>
+        </div>
+        <div class="information-list">
+            <span class="title">MY EMAIL</span>
+            <span id="email" class="email-item"></span>
+        </div>
+        <div  class="information-list">
+            <span class="title">MY adress</span>
+            <span id="adress" class="adress-item"></span>
+        </div>
+        <div  class="information-list">
+            <span class="title">MY phone number</span>
+            <span id="phone" class="phone-item"></span>
+        </div>
+    </div>
 </template>

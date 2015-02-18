@@ -5,18 +5,16 @@
     var setings = {
         document: document.currentScript.ownerDocument,
         myCardProto: Object.create(HTMLElement.prototype),
-        url: 'https://api.github.com/users/'
+        url: 'http://api.randomuser.me/'
     }
 
 
     var API = {
         getUser: function () {
-            console.log('getUser 3');
-
             var that = this,
                 xhr = new XMLHttpRequest();
 
-            xhr.open('GET', setings.url + 'drugak');
+            xhr.open('GET', setings.url);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === xhr.DONE) {
                     status = xhr.status;
@@ -29,32 +27,38 @@
             };
             xhr.send();
         },
-        fillUser: function (user){
-            console.log('fillUser 4');
-            var usr = setings.myCardProto.shadow;
-            console.log('fillUser 4.1', usr);
-            usr.querySelector('#name').textContent = user.name;
-            usr.querySelector('#avatar').src = user.avatar_url;
+        fillUser: function (randomUser){
+            var usr = setings.myCardProto.shadow,
+                userNode = {
+                    name: usr.querySelector('#name'),
+                    email: usr.querySelector('#email'),
+                    adress: usr.querySelector('#adress'),
+                    phone: usr.querySelector('#phone'),
+                    photo: usr.querySelector('#photo')
+                },
+                userObj = randomUser.results[0].user;
+
+            userNode.email.textContent = userObj.email;
+            userNode.name.textContent = userObj.name.first;
+            userNode.adress.textContent = userObj.location.state;
+            userNode.phone.textContent = userObj.phone;
+            userNode.photo.src = userObj.picture.medium;
         }
     };
 
 
     var lifeСycle = {
         createdCallback: setings.myCardProto.createdCallback = function (){
-            console.log('createdCallback 1');
-            var template = setings.document.querySelector('#my-card'),
+            var template = setings.document.querySelector('#random-user'),
                 usr = template.content.cloneNode(true);
             setings.myCardProto.shadow = this.createShadowRoot();
-            console.log('createdCallback 1.1');
             setings.myCardProto.shadow.appendChild(usr);
-            console.log('createdCallback 1.2');
         },
         attachedCallback: setings.myCardProto.attachedCallback = function () {
-            console.log('attachedCallback 2');
             API.getUser();
         }
     }
 
 
-    var Xgithub = document.registerElement('my-card', {'prototype': setings.myCardProto});
+    var Xgithub = document.registerElement('random-user', {'prototype': setings.myCardProto});
 }());
